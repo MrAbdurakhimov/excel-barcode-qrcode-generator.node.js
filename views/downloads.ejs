@@ -22,7 +22,7 @@
     <div id="app">
       <div class="p-5 bg-light">
         <div class="container">
-          <h1 class="display-3">Excel to BarCode</h1>
+          <h1 class="display-3">Downloads are ready!</h1>
           <p class="lead">
             Hello! This application helps you to generate
             <mark> BarCodes </mark> and <mark>QRCodes</mark> from Excel document
@@ -31,27 +31,11 @@
         </div>
       </div>
     </div>
-    <form
-      action="/upload"
-      enctype="multipart/form-data"
-      method="post"
-      class="p-5 container"
-    >
-      <div class="form-group">
-        <label for="file">Select Excel File</label>
-        <br />
-        <input
-          type="file"
-          class="form-control-file"
-          id="file"
-          name="excel"
-          accept=".xlsx"
-        />
-      </div>
-      <hr class="my-2" />
-      <button type="Get BarCodes" class="btn btn-primary">Upload</button>
-    </form>
-
+    <div class="downloads container p-5">
+      <% for(var i=0; i < data.length; i++) { %>
+      <a class="btn btn-primary" href="<%= data[i] %>">Download now</a>
+      <% } %>
+    </div>
     <!-- footer -->
     <div>
       <footer class="p-5 footer bg-dark text-white">

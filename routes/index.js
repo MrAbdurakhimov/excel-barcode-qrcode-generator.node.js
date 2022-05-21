@@ -15,14 +15,32 @@ router.post('/upload', handleUpload, async (req, res) => {
   for (let id of data) {
     const barcode = await generateBarCode(id);
     const fileName = `${id}.png`;
+
     fs.mkdirSync(`${__dirname}/../results/` + date, { recursive: true });
     fs.writeFileSync(`${__dirname}/../results/${date}/${fileName}`, barcode); // write file
+    const qrCode = await generateBarCode(id, 'qrcode');
+    const qrFileName = `${id}_qr.png`;
+    fs.mkdirSync(`${__dirname}/../results/` + date + '.qr', {
+      recursive: true,
+    });
+    fs.writeFileSync(
+      `${__dirname}/../results/${date}.qr/${qrFileName}`,
+      qrCode
+    ); // write file
   }
   await zipDirectory(
     `${__dirname}/../results/` + date,
     `${__dirname}/../public/${date}.zip`
   );
-  res.redirect('/' + date + '.zip');
+  await zipDirectory(
+    `${__dirname}/../results/` + date + '.qr',
+    `${__dirname}/../public/${date}.qr.zip`
+  );
+  const downloadLinks = [
+    `${process.env.APP_URL}${date}.zip`,
+    `${process.env.APP_URL}${date}.qr.zip`,
+  ];
+  res.status(201).render('downloads', { data: downloadLinks });
 });
 
 module.exports = router;
