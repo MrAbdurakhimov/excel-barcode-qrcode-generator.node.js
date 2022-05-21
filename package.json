@@ -1,0 +1,12 @@
+{
+  "name": "barcode-generator.node.js",
+  "version": "1.0.0",
+  "description": "Barcode generator api using xlsx",
+  "main": "app.js",
+  "author": "Mukhammadyusuf Abdurakhimov <icoderx@yandex.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
+  }
+}
