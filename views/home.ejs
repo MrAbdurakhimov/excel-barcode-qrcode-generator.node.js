@@ -31,7 +31,12 @@
         </div>
       </div>
     </div>
-    <form action="/upload" method="post" class="p-5 container">
+    <form
+      action="/upload"
+      enctype="multipart/form-data"
+      method="post"
+      class="p-5 container"
+    >
       <div class="form-group">
         <label for="file">Select Excel File</label>
         <br />
@@ -39,7 +44,7 @@
           type="file"
           class="form-control-file"
           id="file"
-          name="file"
+          name="excel"
           accept=".xlsx"
         />
       </div>
