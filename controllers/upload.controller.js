@@ -1,4 +1,4 @@
-const handleUpload = async (req, res) => {
+const handleUpload = async (req, res, next) => {
   console.log(req.files);
   try {
     if (!req.files) {
@@ -11,10 +11,9 @@ const handleUpload = async (req, res) => {
       let excelFile = req.files.excel;
 
       //Use the mv() method to place the file in upload directory (i.e. "uploads")
-      excelFile.mv('./uploads/' + excelFile.name);
-
+      await excelFile.mv('./uploads/' + excelFile.name);
       //send response
-      res.send({
+      const fileData = {
         status: true,
         message: 'File is uploaded',
         data: {
@@ -22,7 +21,9 @@ const handleUpload = async (req, res) => {
           mimetype: excelFile.mimetype,
           size: excelFile.size,
         },
-      });
+      };
+      req.fileData = fileData;
+      next();
     }
   } catch (err) {
     res.status(500).send(err);
