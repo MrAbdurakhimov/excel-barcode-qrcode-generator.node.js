@@ -7,7 +7,6 @@ async function readXlsx(from) {
   for (let i of data) {
     result.push(i.join(','));
   }
-  console.log(result);
   return result;
 }
 
